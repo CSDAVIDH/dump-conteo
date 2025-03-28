@@ -1,0 +1,35 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Entorno
+#.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Directorios del sistema
+.DS_Store
+Thumbs.db
+
+# Caché y dependencias
+.cache/
+dist/
+build/
+
+# Editor Config
+.vscode/
+.idea/
+*.swp
+
+# Docker
+docker-compose.override.yml
+
+# Sequelize
+src/config/db.sqlite
+migrations/
+seeders/
