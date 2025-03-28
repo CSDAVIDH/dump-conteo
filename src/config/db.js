@@ -1,25 +1,27 @@
-require("dotenv").config();
 const { Sequelize } = require("sequelize");
 
+// Cargar variables de entorno
+require("dotenv").config();
+
 const sequelize = new Sequelize(
-  process.env.PG_DATABASE, // Nombre de la BD
-  process.env.PG_USER, // Usuario
-  process.env.PG_PASSWORD, // Contraseña
+  process.env.PG_DATABASE, 
+  process.env.PG_USER, 
+  process.env.PG_PASSWORD,
   {
-    host: process.env.PG_HOST, // Host
-    port: process.env.PG_PORT, // Puerto
-    dialect: "postgres", // Tipo de BD
-    logging: false, // Desactivar logs de SQL en consola
+    host: process.env.PG_HOST,
+    port: process.env.PG_PORT,
+    dialect: "postgres",
+    logging: false, // Para evitar que muestre demasiados logs en consola
   }
 );
 
+// Función para probar la conexión
 const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    console.log("✅ Conexión a PostgreSQL exitosa");
+    console.log("✅ Conectado a PostgreSQL correctamente.");
   } catch (error) {
-    console.error("❌ Error conectando a la base de datos:", error);
-    process.exit(1); // Cerrar la app si hay error
+    console.error("❌ Error al conectar a la base de datos:", error);
   }
 };
 

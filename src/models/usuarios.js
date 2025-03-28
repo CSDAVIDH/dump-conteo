@@ -4,6 +4,11 @@ const { sequelize } = require("../config/db");
 const Usuarios = sequelize.define(
   "Usuarios",
   {
+    id_usuario: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     nombres: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,21 +22,30 @@ const Usuarios = sequelize.define(
       allowNull: false,
     },
     ci: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
+			unique: true,
     },
-		id_rol: {
+    id_rol: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      /*references: {
+        model: "Roles", // Relación con la tabla Roles (debe existir)
+        key: "id_rol",
+      },*/
     },
     correo: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true, // Validación de formato de correo
+      },
     },
     usuario: {
       type: DataTypes.STRING,
       allowNull: false,
+			unique: true,
     },
     password: {
       type: DataTypes.STRING,
@@ -41,7 +55,8 @@ const Usuarios = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    fecha_creacion: {
+   /** 
+		fecha_creacion: {
       type: DataTypes.TIME,
       allowNull: false,
     },
@@ -49,18 +64,16 @@ const Usuarios = sequelize.define(
       type: DataTypes.TIME,
       allowNull: false,
     },
+		*/ 
     estado: {
       type: DataTypes.SMALLINT,
       allowNull: false,
-    },
-    id_usuario: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+			defaultValue: 1, // Estado por defecto: Activo
     },
   },
   {
     timestamps: true,
+		tableName:"Usuarios",
   }
 );
 
